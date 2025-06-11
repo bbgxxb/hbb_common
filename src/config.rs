@@ -1085,10 +1085,6 @@ pub fn get_permanent_password() -> String {
         config_password
     }
 }
-pub fn connect_to_peer(&self, id: &str) {
-    let password = Config::get_permanent_password();
-    self.initiate_connection(id, password);
-}
 
     pub fn set_salt(salt: &str) {
         let mut config = CONFIG.write().unwrap();
