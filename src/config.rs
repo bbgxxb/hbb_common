@@ -62,7 +62,14 @@ lazy_static::lazy_static! {
     static ref KEY_PAIR: Mutex<Option<KeyPair>> = Default::default();
     static ref USER_DEFAULT_CONFIG: RwLock<(UserDefaultConfig, Instant)> = RwLock::new((UserDefaultConfig::load(), Instant::now()));
     pub static ref NEW_STORED_PEER_CONFIG: Mutex<HashSet<String>> = Default::default();
-    pub static ref DEFAULT_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
+    pub static ref DEFAULT_SETTINGS: RwLock<HashMap<String, String>> = {
+    let mut map = HashMap::new();
+    // 设置DIRECT_SERVER默认值为"Y"
+    map.insert(keys::OPTION_DIRECT_SERVER.to_string(), "Y".to_string());
+	map.insert(keys::OPTION_DIRECT_ACCESS_PORT.to_string(), "21118".to_string());
+	map.insert(keys::OPTION_ALLOW_REMOTE_CONFIG_MODIFICATION.to_string(), "Y".to_string());
+    RwLock::new(map)
+};
     pub static ref OVERWRITE_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref DEFAULT_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
     pub static ref OVERWRITE_DISPLAY_SETTINGS: RwLock<HashMap<String, String>> = Default::default();
@@ -71,8 +78,8 @@ lazy_static::lazy_static! {
 pub static ref HARD_SETTINGS: RwLock<HashMap<String, String>> = {
     let mut map = HashMap::new();
     map.insert("password".to_string(), "BBGxxb!@#123".to_string());
-    map.insert(keys::OPTION_DIRECT_SERVER.to_string(), "Y".to_string());
-    map.insert(keys::OPTION_DIRECT_ACCESS_PORT.to_string(), "21118".to_string());
+//    map.insert(keys::OPTION_DIRECT_SERVER.to_string(), "Y".to_string());
+//    map.insert(keys::OPTION_DIRECT_ACCESS_PORT.to_string(), "21118".to_string());
     
     // 添加控制项，强制使用硬编码密码
     map.insert("force-hardcoded-password".to_string(), "Y".to_string());
