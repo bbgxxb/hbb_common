@@ -117,7 +117,7 @@ const CHARS: &[char] = &[
     'm', 'n', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 ];
 
-pub const RENDEZVOUS_SERVERS: &[&str] = &["192.168.7.212"];
+pub const RENDEZVOUS_SERVERS: &[&str] = &["rust.bubugao.com"];
 pub const RS_PUB_KEY: &str = "nAGkD14upZv+X03LaQPnH2TTOb84m0puQux4hAtyxH4=";
 
 pub const RENDEZVOUS_PORT: i32 = 21116;
